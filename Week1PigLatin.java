@@ -1,6 +1,8 @@
 // Sasikaladevi Kumarasamy @ facebook_java_18
 package week1capstone;
 
+// added validation for email address and numbers
+
 //import java.io.*;
 import java.util.Scanner;
 
@@ -29,11 +31,23 @@ public class Week1PigLatin {
 		for(String partOfString: arrayString) {
 			
 			// if the word starts with a vowel, add "way" to the end of the word and print it
-			if(partOfString.toLowerCase().startsWith("a") ||partOfString.toLowerCase().startsWith("e")|| partOfString.toLowerCase().startsWith("i") ||partOfString.toLowerCase().startsWith("o") || partOfString.toLowerCase().startsWith("u")){
+			if (partOfString.contains("@")) {
+				System.out.print(partOfString+" ");
+			}
+			else if (partOfString.contains("0")||partOfString.contains("1")||partOfString.contains("2")||partOfString.contains("3")||
+			 partOfString.contains("4")||partOfString.contains("5")||partOfString.contains("6")||partOfString.contains("7")||
+			 partOfString.contains("8")||partOfString.contains("9")) {
+				System.out.print(partOfString+" ");
+			}
+			else if(partOfString.toLowerCase().startsWith("a") ||partOfString.toLowerCase().startsWith("e")|| partOfString.toLowerCase().startsWith("i") ||partOfString.toLowerCase().startsWith("o") || partOfString.toLowerCase().startsWith("u")){
 			//if(partOfString.startsWith("a") ||partOfString.startsWith("e")|| partOfString.startsWith("i") ||partOfString.startsWith("o") || partOfString.startsWith("u")){
 				partOfString =partOfString.concat("way");
 				System.out.print(" "+partOfString+" ");
-			}	
+			}
+			else if (partOfString.contains("@")) {
+				System.out.println(partOfString);
+			}
+				
 			else {
 				// if the word starts with a consonant, call the method to 
 				// convert it to PigLatin and print it
@@ -49,6 +63,7 @@ public class Week1PigLatin {
     
     // display concluding message
 	System.out.println("\nThanks for trying the translator. Bye");
+	sc.close();
   }
 
 
