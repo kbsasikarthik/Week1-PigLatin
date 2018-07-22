@@ -1,70 +1,50 @@
-// Sasikaladevi Kumarasamy @ facebook_java_18
 package week1capstone;
 
-// added validation for email address and numbers
-
-//import java.io.*;
 import java.util.Scanner;
 
-/* This program translates a user entered sentence into pig latin. 
- * If a word starts with a vowel, just add "way" onto the ending.
- * If a word starts with a consonant, move all of the consonants that appear 
- * before the first vowel to the end of the word, then add "ay" to the end of the word.
- */
 public class Week1PigLatin {
 
-  public static void main(String[] args) {
-	 Scanner sc = new Scanner(System.in);
-	 String choice;
-	 System.out.println("Welcome to the Pig Latin Translator!");
-	 System.out.println("~~~~~~~ ~~ ~~~ ~~~ ~~~~~ ~~~~~~~~~~~\n\n");
-        
-    do {
-    	// Get input string from the user
-    	System.out.print("Enter a line to be translated: ");
-    	String inputString = sc.nextLine();
-    	
-    	// split the input sentence to words delimiting at the white spaces and store it in an array
-		String[] arrayString = inputString.trim().split(" ");
-		
-		// use the enhanced for loop to iterate through the array items
-		for(String partOfString: arrayString) {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String choice;
+		System.out.println("Welcome to the Pig Latin Translator!");
+		System.out.println("~~~~~~~ ~~ ~~~ ~~~ ~~~~~ ~~~~~~~~~~~\n\n");
+		do {
+			System.out.print("Enter a line to be translated: ");
+			String inputString =sc.nextLine();
 			
-			// if the word starts with a vowel, add "way" to the end of the word and print it
-			if (partOfString.contains("@")) {
-				System.out.print(partOfString+" ");
+			String[] wordArray = inputString.trim().split(" ");
+			
+			for (String partOfString: wordArray) {
+				if(charCheck(partOfString)) {
+					System.out.print(partOfString+" ");
+				}
+				else {
+					if(partOfString.toLowerCase().startsWith("a") ||partOfString.toLowerCase().startsWith("e")|| partOfString.toLowerCase().startsWith("i") ||partOfString.toLowerCase().startsWith("o") || partOfString.toLowerCase().startsWith("u")){
+						//if(partOfString.startsWith("a") ||partOfString.startsWith("e")|| partOfString.startsWith("i") ||partOfString.startsWith("o") || partOfString.startsWith("u")){
+							partOfString =partOfString.concat("way");
+							System.out.print(" "+partOfString+" ");
+						}
+							
+					else {
+						// if the word starts with a consonant, call the method to 
+						// convert it to PigLatin and print it
+					    String latin = toPigLatin(partOfString);
+					    System.out.print(latin+" ");
+					}
+				}
 			}
-			else if (partOfString.contains("0")||partOfString.contains("1")||partOfString.contains("2")||partOfString.contains("3")||
-			 partOfString.contains("4")||partOfString.contains("5")||partOfString.contains("6")||partOfString.contains("7")||
-			 partOfString.contains("8")||partOfString.contains("9")) {
-				System.out.print(partOfString+" ");
-			}
-			else if(partOfString.toLowerCase().startsWith("a") ||partOfString.toLowerCase().startsWith("e")|| partOfString.toLowerCase().startsWith("i") ||partOfString.toLowerCase().startsWith("o") || partOfString.toLowerCase().startsWith("u")){
-			//if(partOfString.startsWith("a") ||partOfString.startsWith("e")|| partOfString.startsWith("i") ||partOfString.startsWith("o") || partOfString.startsWith("u")){
-				partOfString =partOfString.concat("way");
-				System.out.print(" "+partOfString+" ");
-			}
-			else if (partOfString.contains("@")) {
-				System.out.println(partOfString);
-			}
-				
-			else {
-				// if the word starts with a consonant, call the method to 
-				// convert it to PigLatin and print it
-			    String latin = toPigLatin(partOfString);
-			    System.out.print(latin+" ");
-			}
-		}
-		// check if the user wants to continue
-		System.out.print("\n\nTranslate another line? (y/n) : ");
-		choice = sc.next();
-		sc.nextLine();
-	}while(choice.toLowerCase().startsWith("y")); // continue the loop only if the user agrees
-    
-    // display concluding message
-	System.out.println("\nThanks for trying the translator. Bye");
-	sc.close();
-  }
+			  
+			// check if the user wants to continue
+			System.out.print("\n\nTranslate another line? (y/n) : ");
+			choice = sc.next();
+			sc.nextLine();
+			}while(choice.toLowerCase().startsWith("y")); // continue the loop only if the user agrees
+		    
+		    // display concluding message
+			System.out.println("\nThanks for trying the translator. Bye");
+			sc.close();
+	}
 
 
 
@@ -91,5 +71,18 @@ public class Week1PigLatin {
     return 0;
   }
 
-  
+// method that checks for the occurrence of numbers and special characters and numbers in a given word
+// returns true if there are onyl alphabets in the given word; else it returns false
+private static boolean charCheck(String words) {
+
+	for (int i=0; i<words.length();i++) {
+		char charAtI = words.charAt(i);
+		if(!((charAtI>='a' && charAtI <='z') || (charAtI==' ')||(charAtI>='A' && charAtI <='Z')))
+	 
+			return true;
+		
+	}
+	return false;
+
+}
 }
