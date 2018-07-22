@@ -1,7 +1,14 @@
+// Sasikaladevi Kumarasamy @ facebook_java_18
 package week1capstone;
 
 import java.util.Scanner;
 
+/* This program translates a user entered sentence into pig latin. 
+ * If a word starts with a vowel, just add "way" onto the ending.
+ * If a word starts with a consonant, move all of the consonants that appear 
+ * before the first vowel to the end of the word, then add "ay" to the end of the word.
+ * It also doesn't alter 
+ */
 public class Week1PigLatin {
 
 	public static void main(String[] args) {
@@ -16,12 +23,13 @@ public class Week1PigLatin {
 			String[] wordArray = inputString.trim().split(" ");
 			
 			for (String partOfString: wordArray) {
+				//if the word contains characters other that alphabets, then print the word as such
 				if(charCheck(partOfString)) {
 					System.out.print(partOfString+" ");
 				}
 				else {
+					// if the word starts with a vowel, add "way" to the end of the word and print it 
 					if(partOfString.toLowerCase().startsWith("a") ||partOfString.toLowerCase().startsWith("e")|| partOfString.toLowerCase().startsWith("i") ||partOfString.toLowerCase().startsWith("o") || partOfString.toLowerCase().startsWith("u")){
-						//if(partOfString.startsWith("a") ||partOfString.startsWith("e")|| partOfString.startsWith("i") ||partOfString.startsWith("o") || partOfString.startsWith("u")){
 							partOfString =partOfString.concat("way");
 							System.out.print(" "+partOfString+" ");
 						}
@@ -46,22 +54,20 @@ public class Week1PigLatin {
 			sc.close();
 	}
 
-
-
 // translates the string passed in to PigLatin and returns it.
 // Split the word at first occurrence of a vowel,
 // move that substring to the beginning of the word and add "ay" to the end
   
-  private static String toPigLatin(String word) {
+private static String toPigLatin(String word) {
     int splitPosition = firstVowel(word);
     return word.substring(splitPosition)+word.substring(0, splitPosition)+"ay";
-  }
+}
 
 // finds the first occurrence of a vowel in a word
-// it loops through each letter of the word and finds the 
+// it scans through each letter of the word and finds the 
 // occurrence of the vowels. If there are no vowels found, it returns 0   
 
-  private static int firstVowel(String word) {
+private static int firstVowel(String word) {
     word = word.toLowerCase();
     for (int i=0; i<word.length(); i++)
       if (word.charAt(i)=='a' || word.charAt(i)=='e' ||
@@ -69,15 +75,16 @@ public class Week1PigLatin {
           word.charAt(i)=='u')
         return i;
     return 0;
-  }
+}
 
 // method that checks for the occurrence of numbers and special characters and numbers in a given word
-// returns true if there are onyl alphabets in the given word; else it returns false
+// returns true if there are only alphabets in the given word; else it returns false
 private static boolean charCheck(String words) {
 
 	for (int i=0; i<words.length();i++) {
 		char charAtI = words.charAt(i);
-		if(!((charAtI>='a' && charAtI <='z') || (charAtI==' ')||(charAtI>='A' && charAtI <='Z')))
+		if(!((charAtI>='a' && charAtI <='z') || (charAtI==' ')||(charAtI>='A' && charAtI <='Z')||
+				(charAtI=='?')||(charAtI=='.')||(charAtI=='"')||(charAtI=='!')||(charAtI==';')||(charAtI==39)))
 	 
 			return true;
 		
@@ -85,4 +92,5 @@ private static boolean charCheck(String words) {
 	return false;
 
 }
-}
+
+}// end of class
