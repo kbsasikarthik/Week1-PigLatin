@@ -3,11 +3,13 @@ package week1capstone;
 
 import java.util.Scanner;
 
+
 /* This program translates a user entered sentence into pig latin. 
  * If a word starts with a vowel, just add "way" onto the ending.
  * If a word starts with a consonant, move all of the consonants that appear 
  * before the first vowel to the end of the word, then add "ay" to the end of the word.
- * It also doesn't alter 
+ * It also doesn't alter the word if the word is an email address or if the word has numbers in it.
+ * if there are extra white space, it ignores it. 
  */
 public class Week1PigLatin {
 
@@ -23,8 +25,12 @@ public class Week1PigLatin {
 			String[] wordArray = inputString.trim().split(" ");
 			
 			for (String partOfString: wordArray) {
+				// this takes care of extra white spaces. If there are extra white spaces, it just ignores it
+				if (partOfString.isEmpty()) {
+					System.out.print("");
+				}
 				//if the word contains characters other that alphabets, then print the word as such
-				if(charCheck(partOfString)) {
+				else if(charCheck(partOfString)) {
 					System.out.print(partOfString+" ");
 				}
 				else {
@@ -77,17 +83,17 @@ private static int firstVowel(String word) {
     return 0;
 }
 
-// method that checks for the occurrence of numbers and special characters and numbers in a given word
+// method that checks for the occurrence of numbers, special characters and punctuation in a given word
 // returns true if there are only alphabets in the given word; else it returns false
 private static boolean charCheck(String words) {
 
 	for (int i=0; i<words.length();i++) {
 		char charAtI = words.charAt(i);
-		if(!((charAtI>='a' && charAtI <='z') || (charAtI==' ')||(charAtI>='A' && charAtI <='Z')||
-				(charAtI=='?')||(charAtI=='.')||(charAtI=='"')||(charAtI=='!')||(charAtI==';')||(charAtI==39)))
+		if(!((charAtI>='a' && charAtI <='z') ||(charAtI>='A' && charAtI <='Z')||
+				(charAtI=='?')||(charAtI=='.')||(charAtI=='"')||(charAtI=='!')||
+				(charAtI==';')||(charAtI==39)||(charAtI==',')||(charAtI==':')))
 	 
-			return true;
-		
+			return true;		
 	}
 	return false;
 
